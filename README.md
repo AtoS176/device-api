@@ -9,6 +9,11 @@ A Spring Boot REST API for managing network devices and their topology relations
 
 ## Getting Started
 
+### Execution permission for macOS/linux
+```bash
+chmod +x gradlew
+```
+
 ### Build
 
 ```bash
