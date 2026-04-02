@@ -14,7 +14,7 @@ public class InvalidMacAddressException extends MappableRuntimeException {
 
     @Override
     public String getDetails() {
-        return "Provided MAC address %s has invalid format".formatted(macAddress);
+        return "Provided MAC address [%s] has invalid format".formatted(macAddress);
     }
 
     @Override

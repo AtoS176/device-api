@@ -44,8 +44,6 @@ docker run -p 8080:8080 device-api:latest
 
 The API will be available at `http://localhost:8080`
 
-**Note:** Docker image uses Java 17 and does not require Java to be installed on your system.
-
 ## API Documentation
 
 ### Device Management
@@ -60,7 +58,7 @@ POST /api/v1/devices
 {
   "macAddress": "00:11:22:33:44:55",
   "deviceType": "ROUTER",
-  "uplink": null
+  "uplink": "00:11:22:33:44:33"
 }
 ```
 

@@ -1,6 +1,7 @@
 package task.device.model;
 
 import inet.ipaddr.MACAddressString;
+import org.apache.commons.lang3.StringUtils;
 import task.common.exceptions.InvalidMacAddressException;
 
 import java.util.Objects;
@@ -14,8 +15,8 @@ public class MacAddress {
     }
 
     private void validate(String mac) {
-        var isValid = new MACAddressString(mac).isValid();
-        if (!isValid) {
+        boolean isValid = new MACAddressString(mac).isValid();
+        if (StringUtils.isBlank(mac) || !isValid) {
             throw new InvalidMacAddressException(mac);
         }
     }

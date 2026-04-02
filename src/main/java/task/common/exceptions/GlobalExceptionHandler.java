@@ -21,10 +21,9 @@ public class GlobalExceptionHandler {
         details.setTitle("Validation Error");
         details.setDetail("The request content contains invalid data");
         Map<String, List<String>> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errors.computeIfAbsent(error.getField(), k -> new ArrayList<>())
-                    .add(error.getDefaultMessage());
-        });
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error -> errors.computeIfAbsent(error.getField(), k -> new ArrayList<>())
+                        .add(error.getDefaultMessage()));
         details.setProperty("errors", errors);
         details.setProperty(ERROR_CODE_PROPERTY, "INVALID_REQUEST_CONTENT");
         return details;
