@@ -62,8 +62,8 @@ POST /api/v1/devices
 ```json
 {
   "macAddress": "00:11:22:33:44:55",
-  "deviceType": "ROUTER",
-  "uplink": "00:11:22:33:44:33"
+  "deviceType": "GATEWAY",
+  "uplink": null
 }
 ```
 
@@ -73,12 +73,13 @@ POST /api/v1/devices
 
 **Error Responses:**
 
-| Status | Error Code | Title | Details |
-|--------|-----------|-------|---------|
-| 400 | `INVALID_MAC_ADDRESS` | Invalid MAC address | Provided MAC address has invalid format |
-| 409 | `CANNOT_REGISTER_DEVICE` | Cannot register device | Device with this MAC address was already registered |
-| 400 | `MISSING_UPLINK_DEVICE` | Missing uplink device | Specified uplink device (MAC address) was not found |
-| 400 | `INVALID_REQUEST_CONTENT` | Validation Error | Request validation failed (field-level errors included) |
+| Status | Error Code                | Title                  | Details                                                                   |
+|--------|---------------------------|------------------------|---------------------------------------------------------------------------|
+| 409 | `CANNOT_REGISTER_DEVICE`  | Cannot register device | Device with this MAC address was already registered                       |
+| 400 | `INVALID_MAC_ADDRESS`     | Invalid MAC address    | Provided MAC address has invalid format                                   |
+| 400 | `UPLINK_NOT_REGISTERED`   | Uplink not registered  | Specified uplink device (MAC address) was not found                       |
+| 400 | `UNSUPPORTED_DEVICE_TYPE` | Unsuported device type | Cannot parse device type. Supported values: GATEWAY, SWITCH, ACCESS_POINT |
+| 400 | `INVALID_REQUEST_CONTENT` | Validation Error       | Request validation failed (field-level errors included)                   |
 
 ---
 
@@ -94,10 +95,10 @@ GET /api/v1/devices
 [
   {
     "macAddress": "00:11:22:33:44:55",
-    "deviceType": "ROUTER"
+    "deviceType": "GATEWAY"
   },
   {
-    "macAddress": "00:11:22:33:44:66",
+    "macAddress": "00:11:22:33:44:33",
     "deviceType": "SWITCH"
   }
 ]
@@ -119,7 +120,7 @@ GET /api/v1/devices/{macAddress}
 ```json
 {
   "macAddress": "00:11:22:33:44:55",
-  "deviceType": "ROUTER"
+  "deviceType": "GATEWAY"
 }
 ```
 

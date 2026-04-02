@@ -5,10 +5,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -46,6 +43,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UplinkNotRegisteredException.class)
     public ProblemDetail handleUplinkNotRegistered(UplinkNotRegisteredException ex) {
+        return createDetails(HttpStatus.BAD_REQUEST, ex);
+    }
+
+    @ExceptionHandler(InvalidDeviceTypeException.class)
+    public ProblemDetail handleInvalidMac(InvalidDeviceTypeException ex) {
         return createDetails(HttpStatus.BAD_REQUEST, ex);
     }
 

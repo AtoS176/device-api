@@ -11,7 +11,7 @@ public class UplinkNotRegisteredException extends MappableRuntimeException {
 
     @Override
     public String getTitle() {
-        return "Missing uplink device";
+        return "Uplink not registered";
     }
 
     @Override
@@ -21,6 +21,6 @@ public class UplinkNotRegisteredException extends MappableRuntimeException {
 
     @Override
     public String getErrorCode() {
-        return "MISSING_UPLINK_DEVICE";
+        return "UPLINK_NOT_REGISTERED";
     }
 }

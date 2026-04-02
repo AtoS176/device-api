@@ -196,6 +196,21 @@ class DeviceControllerIntegrationTest {
   }
 
   @Test
+  void shouldReturn400WhenRegisteringDeviceWithInvalidType() {
+    String invalidMacJson = "{\"macAddress\": \"00:11:22:33:44:55\", \"deviceType\": \"router\", \"uplink\": null}";
+
+    given()
+            .contentType("application/json")
+            .body(invalidMacJson)
+            .when()
+            .post("/api/v1/devices")
+            .then()
+            .statusCode(400)
+            .body("title", equalTo("Unsupported device type"))
+            .body("errorCode", equalTo("UNSUPPORTED_DEVICE_TYPE"));
+  }
+
+  @Test
   void shouldReturn400WhenRegisteringDeviceWithNonExistentUplink() {
     String requestBody =
         "{\"macAddress\": \"00:11:22:33:44:55\", \"deviceType\": \"SWITCH\", \"uplink\": \"FF:FF:FF:FF:FF:FF\"}";
@@ -207,8 +222,8 @@ class DeviceControllerIntegrationTest {
         .post("/api/v1/devices")
         .then()
         .statusCode(400)
-        .body("title", equalTo("Missing uplink device"))
-        .body("errorCode", equalTo("MISSING_UPLINK_DEVICE"));
+        .body("title", equalTo("Uplink not registered"))
+        .body("errorCode", equalTo("UPLINK_NOT_REGISTERED"));
   }
 
   @Test
